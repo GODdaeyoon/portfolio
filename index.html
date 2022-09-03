@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=yes">
+	<meta name="format-detection" content="telephone=no">
+
+	<script src="js/jquery.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="js/common.js"></script>
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+	<style>
+		/* 크로스브라우징을 위한 CSS 초기화 */
+		*{margin:0; padding:0;} 
+		body{font-size:16px; color:#888; font-family: 'Noto Sans KR', sans-serif;; -webkit-text-size-adjust:none;}
+		a:link{font-size:16px; color:#888; text-decoration:none;}                                       
+		a:hover{font-size:16px; text-decoration:none;}
+		a:visited{font-size:16px; color:#888;  text-decoration:none;}
+		a:active{font-size:16px;  text-decoration:none;}
+		caption, legend{font-size:0px; width:0px; height:0px; overflow:hidden; position:absolute; visibility:hidden;}
+		img{border:0px;}
+		fieldset,img{border:0; vertical-align:top;}
+		table{border-collapse:collapse; border-spacing:0; border:0;}
+		input,textarea,select{font-family:inherit; font-size:inherit; font-weight:inherit;}
+		input[type=password]{IME-MODE: disabled; font-family:'굴림';}
+		ul,ol,dl{list-style:none; margin:0;}
+		textarea{overflow:auto;} 
+		button,label{cursor:pointer;}
+		hr{display:none; clear:both;}
+
+		.inner{width:100%; max-width:1200px; margin:0 auto; position:relative;}
+		.roboto{font-family: 'Roboto', sans-serif;}
+		@media all and (max-width:1200px){
+			.inner{width:93.75%;}
+		}
+		.main_con01{padding:100px 0; background:#f5f5f5}
+		.main_con02{padding:100px 0;}
+
+		.tit{text-align:center;}
+		.tit span{display:block; font-size:13px; letter-spacing:0.3em; color:#aaa; font-weight:300;}
+		.tit p{font-size:36px; letter-spacing:-0.04em; color:#000; font-weight:bold;}
+		.list{font-size:0; letter-spacing:-4px; padding-top:50px;}
+		.list ul li{display:inline-block; vertical-align:top; width:calc(25% - 15px); margin-right:20px;}
+		.list ul li:nth-of-type(4n){margin-right:0;}
+		.list ul li:nth-of-type(n+5){padding-top:60px;}
+		.list ul li > a{display:block;}
+		.list ul li .img_box{border-radius:10px; overflow:hidden;}
+		.list ul li .img_box:hover .hover_box{opacity:1;}
+		.list ul li .img_box .hover_box{display:table; width:100%; height:200px; background:rgba(0,0,0,0.8); opacity:0; transition: all 0.3s;}
+		.list ul li .img_box .hover_box .box{display:table-cell; vertical-align:bottom; width:100%; height:100%; padding:0 0 20px 20px; box-sizing:border-box;}
+		.list ul li .img_box .hover_box .box dl dt{display:inline-block; vertical-align:bottom; margin-right:10px; font-size:14px; letter-spacing:-0.04em; color:#fff; font-weight:200; width:50px;}
+		.list ul li .img_box .hover_box .box dl dd{display:inline-block; vertical-align:bottom; width:60px; text-align:right; font-size:14px; letter-spacing:-0.04em; color:#fff; font-weight:200;}
+		.list ul li .img_box .hover_box .box dl dd b{font-size:20px; font:500;}
+		.list ul li .txt_box{ padding-top:15px;}
+		.list ul li .txt_box .desc p{display:inline-block; vertical-align:middle; font-size:18px; font-weight:700; letter-spacing:-0.04em; color:#222; width:calc(100% - 48px);}
+		.list ul li .txt_box .desc a{display:inline-block; vertical-align:middle; font-size:13px; font-weight:300; letter-spacing:-0.04em; color:#afafaf; width:48px; border-bottom:1px solid #ccc}
+
+		.popup_bg{position:fixed; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:119; cursor:pointer; display:none;}
+		.list ul li .txt_box .popup{position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); width:1000px; height:800px; overflow-y:auto; z-index:120; display:none; border-radius:30px; }
+		.list ul li .txt_box .popup::-webkit-scrollbar{display:none;}
+		.list ul li .txt_box .popup > img{width:100%;}
+
+		@media all and (max-width:1000px){
+			.list ul li{width:calc(50% - 10px);}
+			.list ul li:nth-of-type(2n){margin-right:0;}
+			.list ul li:nth-of-type(n+3){padding-top:60px;}
+			.list ul li .img_box .hover_box{opacity:1;}
+		}
+
+	</style>
+</head>
+<body>
+	<div id="wrap">
+		<div class="popup_bg"></div>
+		<div class="main_con01">
+			<div class="inner">
+				<div class="tit">
+					<span class="roboto">LANDING PAGE</span>
+					<p>랜딩페이지</p>
+				</div>
+				<div class="list">
+					<ul>
+						<li>
+							<div class="img_box" style="background:url('img/img01.png')no-repeat center / cover">
+								<a href="https://www.padanddisc.com" target="_blank">
+									<div class="hover_box">
+										<div class="box">
+											<dl>
+												<dt>기여도</dt>
+												<dd><b>100 </b>%</dd>
+											</dl>
+											<dl>
+												<dt>작업기간</dt>
+												<dd><b>1 </b>일</dd>
+											</dl>
+										</div>
+									</div>
+								</a>
+							</div>
+							<div class="txt_box">
+								<div class="popup">
+									<img src="img/img01_01.jpg" alt="">
+								</div>
+								<div class="desc">
+									<p>케이엠파츠</p>
+									<a href="javascript:;">원본보기</a>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="img_box" style="background:url('img/img02.png')no-repeat center / cover">
+								<a href="https://bodylinefinder.vizensoft.com/" target="_blank">
+									<div class="hover_box">
+										<div class="box">
+											<dl>
+												<dt>기여도</dt>
+												<dd><b>100 </b>%</dd>
+											</dl>
+											<dl>
+												<dt>작업기간</dt>
+												<dd><b>1 </b>일</dd>
+											</dl>
+										</div>
+									</div>
+								</a>
+							</div>
+							<div class="txt_box">
+								<div class="popup">
+									<img src="img/img01_01.jpg" alt="">
+								</div>
+								<div class="desc">
+									<p>숨은바디</p>
+									<a href="javascript:;">원본보기</a>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="img_box" style="background:url('img/img03.png')no-repeat center / cover">
+								<a href="http://www.gonbio.com/" target="_blank">
+									<div class="hover_box">
+										<div class="box">
+											<dl>
+												<dt>기여도</dt>
+												<dd><b>100 </b>%</dd>
+											</dl>
+											<dl>
+												<dt>작업기간</dt>
+												<dd><b>1 </b>일</dd>
+											</dl>
+										</div>
+									</div>
+								</a>
+							</div>
+							<div class="txt_box">
+								<div class="popup">
+									<img src="img/img01_01.jpg" alt="">
+								</div>
+								<div class="desc">
+									<p>지오엔바이오</p>
+									<a href="javascript:;">원본보기</a>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="img_box" style="background:url('img/img04.png')no-repeat center / cover">
+								<a href="http://www.nadoc.kr/" target="_blank">
+									<div class="hover_box">
+										<div class="box">
+											<dl>
+												<dt>기여도</dt>
+												<dd><b>100 </b>%</dd>
+											</dl>
+											<dl>
+												<dt>작업기간</dt>
+												<dd><b>1 </b>일</dd>
+											</dl>
+										</div>
+									</div>
+								</a>
+							</div>
+							<div class="txt_box">
+								<div class="popup">
+									<img src="img/img01_01.jpg" alt="">
+								</div>
+								<div class="desc">
+									<p>웝코퍼레이션</p>
+									<a href="javascript:;">원본보기</a>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="main_con02">
+			<div class="inner">
+				<div class="tit">
+					<span class="roboto">MAIN PAGE</span>
+					<p>메인페이지</p>
+				</div>
+				<div class="list">
+					<ul>
+						<li>
+							<div class="img_box" style="background:url('img/img05.png')no-repeat center / cover">
+								<a href="https://igramps.vizensoft.com/" target="_blank">
+									<div class="hover_box">
+										<div class="box">
+											<dl>
+												<dt>기여도</dt>
+												<dd><b>100 </b>%</dd>
+											</dl>
+											<dl>
+												<dt>작업기간</dt>
+												<dd><b>1 </b>일</dd>
+											</dl>
+										</div>
+									</div>
+								</a>
+							</div>
+							<div class="txt_box">
+								<div class="popup">
+									<img src="img/img01_01.jpg" alt="">
+								</div>
+								<div class="desc">
+									<p>아이그램</p>
+									<a href="javascript:;">원본보기</a>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="img_box" style="background:url('img/img06.png')no-repeat center / cover">
+								<a href="https://www.cbrh.or.kr/" target="_blank">
+									<div class="hover_box">
+										<div class="box">
+											<dl>
+												<dt>기여도</dt>
+												<dd><b>100 </b>%</dd>
+											</dl>
+											<dl>
+												<dt>작업기간</dt>
+												<dd><b>1 </b>일</dd>
+											</dl>
+										</div>
+									</div>
+								</a>
+							</div>
+							<div class="txt_box">
+								<div class="popup">
+									<img src="img/img01_01.jpg" alt="">
+								</div>
+								<div class="desc">
+									<p>충청북도장애인</p>
+									<a href="javascript:;">원본보기</a>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="img_box" style="background:url('img/img07.png')no-repeat center / cover">
+								<a href="http://seochomaeul.org" target="_blank">
+									<div class="hover_box">
+										<div class="box">
+											<dl>
+												<dt>기여도</dt>
+												<dd><b>100 </b>%</dd>
+											</dl>
+											<dl>
+												<dt>작업기간</dt>
+												<dd><b>1 </b>일</dd>
+											</dl>
+										</div>
+									</div>
+								</a>
+							</div>
+							<div class="txt_box">
+								<div class="popup">
+									<img src="img/img01_01.jpg" alt="">
+								</div>
+								<div class="desc">
+									<p>서초구 마을공동체</p>
+									<a href="javascript:;">원본보기</a>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="img_box" style="background:url('img/img08.png')no-repeat center / cover">
+								<a href="https://metaphys.vizensoft.com/" target="_blank">
+									<div class="hover_box">
+										<div class="box">
+											<dl>
+												<dt>기여도</dt>
+												<dd><b>100 </b>%</dd>
+											</dl>
+											<dl>
+												<dt>작업기간</dt>
+												<dd><b>1 </b>일</dd>
+											</dl>
+										</div>
+									</div>
+								</a>
+							</div>
+							<div class="txt_box">
+								<div class="popup">
+									<img src="img/img01_01.jpg" alt="">
+								</div>
+								<div class="desc">
+									<p>메타피스</p>
+									<a href="javascript:;">원본보기</a>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="img_box" style="background:url('img/img09.png')no-repeat center / cover">
+								<a href="http://www.brinksglobal.co.kr/" target="_blank">
+									<div class="hover_box">
+										<div class="box">
+											<dl>
+												<dt>기여도</dt>
+												<dd><b>100 </b>%</dd>
+											</dl>
+											<dl>
+												<dt>작업기간</dt>
+												<dd><b>1 </b>일</dd>
+											</dl>
+										</div>
+									</div>
+								</a>
+							</div>
+							<div class="txt_box">
+								<div class="popup">
+									<img src="img/img01_01.jpg" alt="">
+								</div>
+								<div class="desc">
+									<p>브링스글로벌</p>
+									<a href="javascript:;">원본보기</a>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="img_box" style="background:url('img/img10.png')no-repeat center / cover">
+								<a href="http://rootplant.kr" target="_blank">
+									<div class="hover_box">
+										<div class="box">
+											<dl>
+												<dt>기여도</dt>
+												<dd><b>100 </b>%</dd>
+											</dl>
+											<dl>
+												<dt>작업기간</dt>
+												<dd><b>1 </b>일</dd>
+											</dl>
+										</div>
+									</div>
+								</a>
+							</div>
+							<div class="txt_box">
+								<div class="popup">
+									<img src="img/img01_01.jpg" alt="">
+								</div>
+								<div class="desc">
+									<p>서울루트플란트치과</p>
+									<a href="javascript:;">원본보기</a>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="img_box" style="background:url('img/img11.png')no-repeat center / cover">
+								<a href="http://www.petconomy.or.kr" target="_blank">
+									<div class="hover_box">
+										<div class="box">
+											<dl>
+												<dt>기여도</dt>
+												<dd><b>100 </b>%</dd>
+											</dl>
+											<dl>
+												<dt>작업기간</dt>
+												<dd><b>1 </b>일</dd>
+											</dl>
+										</div>
+									</div>
+								</a>
+							</div>
+							<div class="txt_box">
+								<div class="popup">
+									<img src="img/img01_01.jpg" alt="">
+								</div>
+								<div class="desc">
+									<p>한국반려동물</p>
+									<a href="javascript:;">원본보기</a>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="img_box" style="background:url('img/img12.png')no-repeat center / cover">
+								<a href="https://smartpower.vizensoft.com/" target="_blank">
+									<div class="hover_box">
+										<div class="box">
+											<dl>
+												<dt>기여도</dt>
+												<dd><b>100 </b>%</dd>
+											</dl>
+											<dl>
+												<dt>작업기간</dt>
+												<dd><b>1 </b>일</dd>
+											</dl>
+										</div>
+									</div>
+								</a>
+							</div>
+							<div class="txt_box">
+								<div class="popup">
+									<img src="img/img01_01.jpg" alt="">
+								</div>
+								<div class="desc">
+									<p>스마트파워</p>
+									<a href="javascript:;">원본보기</a>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="img_box" style="background:url('img/img13.png')no-repeat center / cover">
+								<a href="https://www.estc.co.kr" target="_blank">
+									<div class="hover_box">
+										<div class="box">
+											<dl>
+												<dt>기여도</dt>
+												<dd><b>100 </b>%</dd>
+											</dl>
+											<dl>
+												<dt>작업기간</dt>
+												<dd><b>1 </b>일</dd>
+											</dl>
+										</div>
+									</div>
+								</a>
+							</div>
+							<div class="txt_box">
+								<div class="popup">
+									<img src="img/img01_01.jpg" alt="">
+								</div>
+								<div class="desc">
+									<p>이에스티씨</p>
+									<a href="javascript:;">원본보기</a>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="img_box" style="background:url('img/img14.png')no-repeat center / cover">
+								<a href="http://www.seoul28.com/" target="_blank">
+									<div class="hover_box">
+										<div class="box">
+											<dl>
+												<dt>기여도</dt>
+												<dd><b>100 </b>%</dd>
+											</dl>
+											<dl>
+												<dt>작업기간</dt>
+												<dd><b>1 </b>일</dd>
+											</dl>
+										</div>
+									</div>
+								</a>
+							</div>
+							<div class="txt_box">
+								<div class="popup">
+									<img src="img/img01_01.jpg" alt="">
+								</div>
+								<div class="desc">
+									<p>서울고28회동기회</p>
+									<a href="javascript:;">원본보기</a>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="img_box" style="background:url('img/img15.png')no-repeat center / cover">
+								<a href="http://www.graphcorporation.com" target="_blank">
+									<div class="hover_box">
+										<div class="box">
+											<dl>
+												<dt>기여도</dt>
+												<dd><b>100 </b>%</dd>
+											</dl>
+											<dl>
+												<dt>작업기간</dt>
+												<dd><b>1 </b>일</dd>
+											</dl>
+										</div>
+									</div>
+								</a>
+							</div>
+							<div class="txt_box">
+								<div class="popup">
+									<img src="img/img01_01.jpg" alt="">
+								</div>
+								<div class="desc">
+									<p>비트나인</p>
+									<a href="javascript:;">원본보기</a>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="img_box" style="background:url('img/img16.png')no-repeat center / cover">
+								<a href="http://shoremagic.co.kr" target="_blank">
+									<div class="hover_box">
+										<div class="box">
+											<dl>
+												<dt>기여도</dt>
+												<dd><b>100 </b>%</dd>
+											</dl>
+											<dl>
+												<dt>작업기간</dt>
+												<dd><b>1 </b>일</dd>
+											</dl>
+										</div>
+									</div>
+								</a>
+							</div>
+							<div class="txt_box">
+								<div class="popup">
+									<img src="img/img01_01.jpg" alt="">
+								</div>
+								<div class="desc">
+									<p>우남</p>
+									<a href="javascript:;">원본보기</a>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		$('.list ul li .txt_box .desc a').on('click', function(){
+			$(this).parents().siblings('.popup').fadeIn();
+			$('.popup_bg').fadeIn();
+		})
+		$('.popup_bg').on('click', function(){
+			$(this).fadeOut();
+			$('.popup').fadeOut();
+		})
+	</script>
+</body>
+</html>
